@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coaching With Percy - Life Coaching Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #FF8C00;
+            --dark-bg: #2A2A2A;
+            --light-bg: #F5F5F5;
+            --text-light: #FFFFFF;
+            --text-dark: #333333;
+            --border-color: #DDD;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-orange);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        header button {
+            background-color: var(--text-light);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        header button:hover {
+            background-color: var(--primary-orange);
+            color: var(--text-light);
+            border: 2px solid var(--text-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: var(--light-bg);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about {
+            display: flex;
+            gap: 2rem;
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .about-content {
+            flex: 1;
+            background-color: var(--dark-bg);
+            padding: 2.5rem;
+            border-radius: 8px;
+            color: var(--text-light);
+        }
+
+        .about-content::before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-orange);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .philosophy h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .philosophy p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background-color: var(--dark-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-light);
+            margin: 3rem 0;
+        }
+
+        .newsletter::before {
+            content: '';
+            display: block;
+            width: 400px;
+            height: 2px;
+            background-color: var(--primary-orange);
+            margin: 0 auto 2rem;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            background-color: var(--primary-orange);
+            color: var(--text-light);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #E67E00;
+            transform: translateY(-2px);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: var(--text-light);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: var(--text-dark);
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--primary-orange);
+        }
+
+        .modal h2 {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+        }
+
+        .contact-form button {
+            background-color: var(--primary-orange);
+            color: var(--text-light);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .contact-form button:hover {
+            background-color: #E67E00;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .about {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .about-content {
+                padding: 1.5rem;
+            }
+
+            .newsletter h2 {
+                font-size: 1.5rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form button {
+                width: 100%;
+            }
+
+            header {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+
+        .success-message {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <span class="logo-icon">🎯</span>
+            <div>
+                <div>Coaching</div>
+                <div style="font-size: 0.9rem;">With Percy</div>
+            </div>
+        </div>
+        <button onclick="openContactModal()">Contact</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Find Clarity. Build Confidence.<br>Create the Life You Deserve.</h1>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=400&fit=crop" alt="Life coaching visualization" />
+        </div>
+        <div class="about-content">
+            <h2>Hi, I'm Lionel Percy Masigo</h2>
+            <p>A certified life coach dedicated to guiding individuals to flourish while holding onto their core values and beliefs</p>
+            
+            <h3 style="font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.75rem;">Why Coaching Resonates with Me?</h3>
+            <p>My driving force is witnessing the transformation of individuals as they embrace their authentic selves, free from judgment & condemnation. This deep seated passion fuels my commitment to recognizing the inherent humanity in everyone. Guiding them to flourish while vociferously holding onto their core values and beliefs. Coaching for me is not merely a profession but a profound partnership a dynamic journey with my clients uncovering & embracing the best version of themselves, both personally & professionally.</p>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy">
+        <h2>My Philosophy on Coaching</h2>
+        <p>I firmly believe that every person harbors the potential to achieve their utmost to become their most extraordinary self. It often takes a gentle yet powerful nudge to awaken the realization. To deem an era enriched with our unique contributions making the tapestry of life infinitely more vibrant. My approach to coaching is deeply rooted in empathy & understanding, meeting individuals where they are recognizing them first & foremost as unique beings with their own stories. This empathetic recognition forms the foundation of my coaching practice.</p>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <h2>Subscribe to Grow with Purpose</h2>
+        <p>Join my monthly newsletter for mindset tips<br>Success stories & personal growth tools.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Coaching With Percy. All rights reserved.</p>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeContactModal()">&times;</span>
+            <h2>Get In Touch</h2>
+            <div id="successMessage" class="success-message">
+                Thank you! We'll be in touch soon.
+            </div>
+            <form class="contact-form" onsubmit="handleContactSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('contactModal');
+
+        function openContactModal() {
+            modal.style.display = 'block';
+        }
+
+        function closeContactModal() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+            
+            // Reset form
+            event.target.reset();
+            
+            // Hide message after 3 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+                closeContactModal();
+            }, 3000);
+        }
+
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const input = event.target.querySelector('input');
+            const button = event.target.querySelector('button');
+            const originalText = button.textContent;
+            
+            button.textContent = 'Subscribed! ✓';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                input.value = '';
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
